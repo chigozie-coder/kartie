@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>KARTIe</title>
+  <meta name="description" content="The #1 best online shopping created by Chigozie Anyaeji" />
+  <meta name="author" content="Chigozie Anyaeji" />
+  <!-- HTML -->
+  
+
+  <!-- Custom Styles -->
+  <script src="https://chigozie-coder.github.io/Swoader/Swoader.js" type="text/javascript" charset="utf-8"></script>
+  <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+  <script type="text/javascript" charset="utf-8">
+      var swoader = new Swoader("darkorange",
+           "80","white");
+           swoader.start()
+           swoader.addText("loading","40px","white")
+           swoader.animateText()
+           swoader.removeWhenLoaded(5000)
+  </script>
+</head>
+
+<body onload="showSlides()">
+  <header>
+    <span class="logo"><a href="/">KARTIe</a></span>
+    <span id="sbar_toggler" onclick="onav()">&#8801;</span>
+    <div id="d_links">
+            <a class="sbar_links" href="/">Home</a>
+    {% if session.email %}
+      <a href="/logout" class="sbar_links">logout</a>
+    {% else %}
+      <a href="/login" class="sbar_links">login</a>
+      <a href="/signup" class="sbar_links">signup</a>
+    {% endif %}
+      <a href="/cart" class="sbar_links">cart</a>
+      <a class="sbar_links" href="/category/shoes">Shoes</a>
+      <a class="sbar_links" href="/category/gadgets">Gadgets</a>
+      <a class="sbar_links" href="/category/clothes">Clothes</a>
+      
+    </div>
+  </header>
+    <div id="side_bar" style="transform: translateX(-100vw)">
+      <span id="hide_sbar" onclick="cnav()">&times;</span>
+      <div id="sbar_inner">
+      <a class="sbar_links" href="/">Home</a>
+    {% if session.email %}
+      <a href="/logout" class="sbar_links">logout</a>
+    {% else %}
+      <a href="/login" class="sbar_links">login</a>
+      <a href="/signup" class="sbar_links">signup</a>
+    {% endif %}
+      <a href="/cart" class="sbar_links">cart</a>
+      <a class="sbar_links" href="/category/shoes">Shoes</a>
+      <a class="sbar_links" href="/category/gadgets">Gadgets</a>
+      <a class="sbar_links" href="/category/clothes">Clothes</a>
+      
+      </div>
+    </div>
+  <div id="main">
+    <div id="banner">
+      <div id="banner_inner">
+        <span class="logo">KARTIe</span>
+        <div id="des">
+          A shop for all
+        </div>
+        <button id="shop_now" class="btn btn_primary"><a href="#shop">Shop Now</a></button>
+      </div>
+    </div>
+    <div id="greet">
+    {% if session.email %}
+      <span id="greet_day">Good day</span>,  {{Getuser(session.email).name()}}
+    {% else %}
+      <span id="greet_day">Good day</span>,  User
+    {% endif %}
+    </div>
+   
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+  <img src="static/images/banner_ads_1030.jpg" style="width:100%" height="170px">
+</div>
+
+<div class="mySlides fade">
+  <img src="static/images/banner_ads_1040.jpg" style="width:100%" height="170px">
+</div>
+
+<div class="mySlides fade">
+  <img src="static/images/banner_ads_1020.jpg" style="width:100%" height="170px">
+</div>
+
+
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+</div>
+
+<div id="shop">
+  <div class="cat">
+    <div class="cat_header"><h2>Gadgets</h2><span class="cat_show-all_btn"><a href="/category/gadgets">&gt;</a></span></div>
+    <div class="cat_inner">
+   {% for gd in gadgets %}
+      <div class="p_card">
+        <img src="{{url_for('static',filename=gd.img)}}" class="p_card_img">
+        <span class="p_price">{{gd.price}}</span>
+        <span class="p_title">{{gd.pname}}</span>
+        <button class="btn btn_primary"><a href="/addtocart/{{gd.id}}">Add to cart</a></button>
+      </div>
+   {% endfor %}
+    </div>
+  </div>
+  <div class="cat">
+    <div class="cat_header"><h2>Clothes</h2><span class="cat_show-all_btn"><a href="/category/clothes">&gt;</a></span></div>
+    <div class="cat_inner">
+   {% for cl in clothes %}
+      <div class="p_card">
+        <img src="{{url_for('static',filename=cl.img)}}" class="p_card_img">
+        <span class="p_price">{{cl.price}}</span>
+        <span class="p_title">{{cl.pname}}</span>
+        <button class="btn btn_primary"><a href="/addtocart/{{cl.id}}">Add to cart</a></button>
+      </div>
+   {% endfor %}
+    </div>
+  </div>
+  <div class="cat">
+    <div class="cat_header"><h2>Shoes</h2><span class="cat_show-all_btn"><a href="/category/shoes">&gt;</a></span></div>
+    <div class="cat_inner">
+   {% for sh in shoes %}
+      <div class="p_card">
+        <img src="{{url_for('static',filename=sh.img)}}" class="p_card_img">
+        <span class="p_price">{{sh.price}}</span>
+        <span class="p_title">{{sh.pname}}</span>
+        <button class="btn btn_primary"><a href="/addtocart/{{sh.id}}">Add to cart</a></button>
+      </div>
+   {% endfor %}
+    </div>
+  </div>
+</div>
+  </div>
+  <footer>
+      <div class="footer-body">
+         <div class="logo">KARTIe</div>
+         <div>
+            <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis interdum dignissim nisl posuere efficitur. </p>
+            <ul>
+               <li><a href="#"> About </a></li>
+               <li><a href="#"> Contact </a></li>
+               <li><a href="#"> Terms & Conditions </a></li>
+               <li><a href="#"> Privacy Policy </a></li>
+            </ul>
+         </div>
+      </div>
+      <div class="footer-copyright">
+         &copy; All rights reserved. Created by <a href="https://chigozieanyaejip.ga">Chigozie Anyaeji</a>
+      </div>
+   </footer>
+  <!-- Project -->
+  <script src="{{url_for('static',filename='main.js')}}"></script>
+</body>
+</html>
